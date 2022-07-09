@@ -1,4 +1,4 @@
-# Exercise 1.9
+# Exercise 1.10
 # mortgage.py
 
 principal = 500000.0
@@ -18,6 +18,7 @@ while principal > 0:
     principal = principal * (1+rate/12) - payment - extra
     total_paid = total_paid + payment + extra
     month = month + 1
+    print(month, round(total_paid, 2), round(principal, 2))
 
-print('Total paid', total_paid)
+print('Total paid', round(total_paid, 2))
 print('Total months', month)
