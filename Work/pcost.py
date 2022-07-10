@@ -1,16 +1,17 @@
 # pcost.py
 #
-# Exercise 1.31
+# Exercise 1.32
 def portfolio_cost(filename):
+    import csv
     cost_temp = 0
-    f = open(filename, 'rt')
+    f = open(filename)
+    rows = csv.reader(f)
     headers = next(f)
-    for line in f:
+    for row in rows:
         try:
-            row = line.split(',')
             cost_temp = cost_temp + int(row[1]) * float(row[2])
         except ValueError:
-            print("Couldn't parse", line) 
+            print("Couldn't parse", row) 
     f.close()
     return cost_temp
 cost = portfolio_cost('Data/portfolio.csv')
