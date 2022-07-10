@@ -1,8 +1,10 @@
 # pcost.py
 #
-# Exercise 1.32
+# Exercise 1.33
+import sys
+import csv
+
 def portfolio_cost(filename):
-    import csv
     cost_temp = 0
     f = open(filename)
     rows = csv.reader(f)
@@ -14,5 +16,11 @@ def portfolio_cost(filename):
             print("Couldn't parse", row) 
     f.close()
     return cost_temp
-cost = portfolio_cost('Data/portfolio.csv')
+
+if len(sys.argv) == 2:
+    filename = sys.argv[1]
+else:
+    filename = 'Data/portfolio.csv'
+
+cost = portfolio_cost(filename)
 print('Total cost:', cost)
