@@ -1,6 +1,6 @@
 # report.py
 #
-# Exercise 2.5
+# Exercise 2.6
 import csv
 
 def read_portfolio(filename):
@@ -23,3 +23,18 @@ portfolio file with keys: name, shares, price
             portfolio.append(stock)
 
     return(portfolio)
+
+def read_prices(filename):
+    '''
+    Reads a set of prices file and returns a dictionary with keys: name, price
+    '''
+    prices = {}
+    with open(filename, 'rt') as f:
+        rows = csv.reader(f)
+        for row in rows:
+            try:
+                prices[row[0]] = float(row[1]) 
+            except IndexError:
+                pass
+
+    return prices
