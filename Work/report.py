@@ -1,6 +1,6 @@
 # report.py
 #
-# Exercise 2.11
+# Exercise 2.12
 import csv
 import sys
 
@@ -77,4 +77,4 @@ headers = ('Name', 'Shares', 'Price', 'Change')
 print('%10s %10s %10s %10s' % headers)
 print(('-' * 10 + ' ') * len(headers))
 for name, shares, price, change in report:
-    print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
+    print(f'{name:>10s} {shares:>10d} {f"${price:0.2f}":>10s} {change:>10.2f}')
