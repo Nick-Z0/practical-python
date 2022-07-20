@@ -1,7 +1,8 @@
 # report.py
 #
-# Exercise 2.6
+# Exercise 2.7
 import csv
+import sys
 
 def read_portfolio(filename):
     '''
@@ -38,3 +39,26 @@ def read_prices(filename):
                 pass
 
     return prices
+
+if len(sys.argv) >= 2:
+    filename = sys.argv[1]
+else:
+    filename = 'Data/portfolio.csv'
+
+if len(sys.argv) >= 2:
+    filename2 = sys.argv[2]
+else:
+    filename2 = 'Data/prices.csv'
+
+portfolio = read_portfolio(filename)
+prices = read_prices(filename2)
+
+old_cost = 0.0
+new_cost = 0.0
+for row in portfolio:
+    old_cost += row['shares'] * row['price']
+    new_cost += row['shares'] * prices[row['name']]
+
+print('Total Cost', round(old_cost, 2))
+print('Current Value', round(new_cost, 2))
+print('Gain/Loss', round(new_cost - old_cost, 2))
