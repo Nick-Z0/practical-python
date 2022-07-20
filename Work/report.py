@@ -1,13 +1,12 @@
 # report.py
 #
-# Exercise 2.7
+# Exercise 2.9
 import csv
 import sys
 
 def read_portfolio(filename):
     '''
-    Reads a stock portfolio file and returns a list of dictionaries of the 
-portfolio file with keys: name, shares, price
+    Reads a stock portfolio file and returns a list of dictionaries of the portfolio file with keys: name, shares, price
     '''
     portfolio = []
     with open(filename, 'rt') as f:
@@ -40,6 +39,17 @@ def read_prices(filename):
 
     return prices
 
+def make_report(portfolio, prices):
+    '''
+    Reads a list of stocks and prices and outputs a report list
+    '''
+    report = []
+    portfolio = read_portfolio(filename)
+    prices = read_prices(filename2)
+    for row in portfolio:
+        report.append((row['name'], row['shares'], prices[row['name']], (prices[row['name']] - row['price'])))
+    return(report)
+
 if len(sys.argv) >= 2:
     filename = sys.argv[1]
 else:
@@ -52,6 +62,7 @@ else:
 
 portfolio = read_portfolio(filename)
 prices = read_prices(filename2)
+report = make_report(filename, filename2)
 
 old_cost = 0.0
 new_cost = 0.0
