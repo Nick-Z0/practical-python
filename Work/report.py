@@ -1,6 +1,6 @@
 # report.py
 #
-# Exercise 2.10
+# Exercise 2.11
 import csv
 import sys
 
@@ -26,7 +26,7 @@ def read_portfolio(filename):
 
 def read_prices(filename):
     '''
-    Reads a set of prices file and returns a dictionary with keys: name, price
+    Reads a CSV file of price data and returns a dictionary with keys: name, price
     '''
     prices = {}
     with open(filename, 'rt') as f:
@@ -41,7 +41,7 @@ def read_prices(filename):
 
 def make_report(portfolio, prices):
     '''
-    Reads a list of stocks and prices and outputs a report list
+    Make a list of (name, shares, price, change) tuples given a portfolio list and prices dictionary.
     '''
     report = []
     portfolio = read_portfolio(filename)
@@ -54,6 +54,8 @@ def make_report(portfolio, prices):
         report.append((name, shares, price, change))
     return(report)
 
+
+# Read data files an create the report data
 if len(sys.argv) >= 2:
     filename = sys.argv[1]
 else:
@@ -66,7 +68,13 @@ else:
 
 portfolio = read_portfolio(filename)
 prices = read_prices(filename2)
+
+# Generate the report data
 report = make_report(filename, filename2)
 
+# Output the report
+headers = ('Name', 'Shares', 'Price', 'Change')
+print('%10s %10s %10s %10s' % headers)
+print(('-' * 10 + ' ') * len(headers))
 for name, shares, price, change in report:
     print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
