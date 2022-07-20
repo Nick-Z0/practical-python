@@ -1,6 +1,6 @@
 # report.py
 #
-# Exercise 2.9
+# Exercise 2.10
 import csv
 import sys
 
@@ -47,7 +47,11 @@ def make_report(portfolio, prices):
     portfolio = read_portfolio(filename)
     prices = read_prices(filename2)
     for row in portfolio:
-        report.append((row['name'], row['shares'], prices[row['name']], (prices[row['name']] - row['price'])))
+        name = row['name']
+        shares = row['shares']
+        price = prices[row['name']]
+        change = price - row['price']
+        report.append((name, shares, price, change))
     return(report)
 
 if len(sys.argv) >= 2:
@@ -64,12 +68,5 @@ portfolio = read_portfolio(filename)
 prices = read_prices(filename2)
 report = make_report(filename, filename2)
 
-old_cost = 0.0
-new_cost = 0.0
-for row in portfolio:
-    old_cost += row['shares'] * row['price']
-    new_cost += row['shares'] * prices[row['name']]
-
-print('Total Cost', round(old_cost, 2))
-print('Current Value', round(new_cost, 2))
-print('Gain/Loss', round(new_cost - old_cost, 2))
+for name, shares, price, change in report:
+    print(f'{name:>10s} {shares:>10d} {price:>10.2f} {change:>10.2f}')
